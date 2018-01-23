@@ -13,8 +13,7 @@ header img{
 }
 /* --------------- SECTION PRESENTATION --------------- */
 #presentation{
-    text-align: center;
-    height: 600px;
+    text-align: center;  
     background-color: antiquewhite;
 }
 
@@ -33,6 +32,7 @@ h1{
     border: 3px solid black;
     position: relative;
     max-width: 90%;
+    margin-bottom: 100px;
 }
 
 #slider img{
@@ -56,19 +56,43 @@ h1{
 }
 
 /* --------------- SECTION GOOGLE MAP --------------- */
-#google-map{
-    height: 600px;
+#google-map{ 
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     background-color: antiquewhite;
+    padding-bottom: 50px;
 }
 
 #map{
     width: 60%;
-    height: 100%;
-    margin: auto;
+    height: 600px;
+    border-radius: 5px;   
 }
 
+#reservation{
+    background-color: teal;
+    width: 25%;
+    border-radius: 5px;
+    position: relative;
+}
+
+#reservation h2{
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 35px;
+}
+
+#reservation h3{
+    margin-left: 3%;
+}
+
+#button-reservation{
+    position: absolute;
+    bottom: 15%;
+    left: 40%;
+}
+
+/* --------------- FOOTER --------------- */
 footer{
     height: 50px;
     line-height: 50px;
@@ -77,4 +101,17 @@ footer{
 
 footer p{
     margin: 0 0 0 10px;
+}
+
+@media screen and (max-width: 780px){
+    #google-map{
+        justify-content: initial;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #reservation{
+        height: 600px;
+        width: 60%;
+    }
 }
