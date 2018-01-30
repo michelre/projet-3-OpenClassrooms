@@ -1,5 +1,3 @@
-
-
 $.getJSON('https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=00725f1585ae004d2043b59894843d43b6650b8e')
   .then((data) => {
     createMarkers(initMap(), data)
@@ -7,11 +5,11 @@ $.getJSON('https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=00725f1
 
 function createMarkers(map, dataAPI){
   // TODO
-  const markers = dataAPI.map(({ position, name }) => {
+  const markers = dataAPI.map(({ position, address }) => {
     return new google.maps.Marker({
       position,
       map: map,
-      title: name,
+      title: address,
     })
   });
   new MarkerClusterer(map, markers,

@@ -92,6 +92,10 @@ h1{
     left: 40%;
 }
 
+#button-reservation button{
+    padding: 10px;
+}
+
 /* --------------- FOOTER --------------- */
 footer{
     height: 50px;
