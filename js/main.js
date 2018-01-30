@@ -4,50 +4,55 @@ const flecheDroite = document.querySelector("#flechedroite");
 
 // Objet slider
 const slider = {
-    index: 0,
-    image: [
-        "images/slider1.jpg",
-        "images/slider2.jpg",
-        "images/slider3.jpg",
-        "images/slider4.jpg",
-        "images/slider5.jpg"  
-        ],
+  index: 0,
+  image: [
+    "images/slider1.jpg",
+    "images/slider2.jpg",
+    "images/slider3.jpg",
+    "images/slider4.jpg",
+    "images/slider5.jpg"
+  ],
 
-    suivant: function() {
-        slider.index++;
-        if (slider.index > slider.image.length - 1){
-            slider.index = 0;
-        }
-        imageSlider.setAttribute("src", slider.image[slider.index]);
-    },
-
-    precedent: function() {
-        slider.index--;
-        if (slider.index < 0){
-            slider.index = slider.image.length - 1;
-        }
-        imageSlider.setAttribute("src", slider.image[slider.index]);
-    },
-
-    clavier: function(e) {   
-        var code = e.keyCode;
-        switch(code) {
-        case 39: slider.suivant();
-        break;
-        case 37: slider.precedent();
-        break;
-        }
+  suivant: function () {
+    this.index++;
+    if (this.index > this.image.length - 1) {
+      this.index = 0;
     }
+    imageSlider.setAttribute("src", this.image[this.index]);
+  },
+
+  precedent: function () {
+    this.index--;
+    if (this.index < 0) {
+      this.index = this.image.length - 1;
+    }
+    imageSlider.setAttribute("src", this.image[this.index]);
+  },
+
+  clavier: function (e) {
+    const code = e.keyCode;
+    switch (code) {
+      case 39:
+        this.suivant();
+        break;
+      case 37:
+        this.precedent();
+        break;
+    }
+  }
 };
 
 // listener fleches et clavier
-flecheDroite.addEventListener("click", function(){
-    slider.suivant();
+flecheDroite.addEventListener("click", function () {
+  slider.suivant();
 });
 
-flecheGauche.addEventListener("click", function(){
-    slider.precedent();
+flecheGauche.addEventListener("click", function (e) {
+  slider.precedent();
 });
 
-document.addEventListener("keydown", slider.clavier);
+document.addEventListener("keydown", function(e){
+  slider.clavier(e);
+})
+
 console.log(slider);

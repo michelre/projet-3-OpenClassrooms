@@ -5,13 +5,19 @@ $.getJSON('https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=00725f1
 
 function createMarkers(map, dataAPI){
   // TODO
-  const markers = dataAPI.map(({ position, address }) => {
-    return new google.maps.Marker({
-      position,
+  let markers = []
+  for(let i = 0; i < dataAPI.length; i++){
+    const marker = new google.maps.Marker({
+      position: dataAPI[i].position,
       map: map,
-      title: address,
+      title: dataAPI[i].address,
     })
-  });
+    google.maps.event.addListener(marker, 'click', function(){
+      $('#address').html(dataAPI[i].address)
+      console.log(dataAPI[i])
+    })
+    markers = markers.concat(marker)
+  }
   new MarkerClusterer(map, markers,
     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 }
