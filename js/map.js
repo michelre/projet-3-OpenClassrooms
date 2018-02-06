@@ -37,7 +37,7 @@ ajaxGet(
 
         if (api[i].status === "OPEN") {
           api[i].status = "OUVERTE";
-        } else {
+        } else if (api[i].status === "CLOSE"){
           api[i].status = "FERMÉE";
         }
 
