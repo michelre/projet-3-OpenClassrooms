@@ -27,33 +27,48 @@
                     </div>
             </div>
         </div>
-
+        
     </section>
 
     <section id="google-map">
         <div id="map"></div>
-
+        
         <div id="reservation">
-            <h2>détails de la station</h2>
-            <h3>Adresse de la station: <p id="address"></p></h3>
-            <h3>Nombre de places:</h3>
-            <h3>Nombre de vélos disponibles:</h3>
+            <div id="reserver">
+                <h2>détails de la station</h2>
+                <div id="informations"></div>
 
-            <div id="button-reservation">
-                <button>Réserver</button>
+                <div id="button-reservation">
+                    <button>Réserver</button>
+                </div>
+            </div>
+
+            <div id="confirmation">
+                <h2>Réservation</h2>
+                <p>Pour confirmer la réservation de votre vélo, apposez votre signature dans le champs ci-dessous, puis validez.</p>
+
+                <div id="canvas"></div>
+
+                <div id="button-confirmation">
+                    <button id="valider">Valider</button>
+                </div>
             </div>
         </div>
+    </section>
+
+    <section id="timer">
+        <div id="block-timer"></div>
     </section>
 
     <footer>
         <p>© 2017 Bike Attitude</p>
     </footer>
 
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_TRsuZe937XLeMc4TflEvtqvAJXlzoNY&callback=initMap" async defer></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script src="js/ajax.js"></script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script type="text/javascript" src="js/map.js"></script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_TRsuZe937XLeMc4TflEvtqvAJXlzoNY&callback=initMap" async defer></script>
+    
 </body>
 </html>
