@@ -152,6 +152,11 @@ h1{
     box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
 }
 
+#time{
+    color: #F2F2F3;
+    text-align: center;
+}
+
 /* --------------- FOOTER --------------- */
 footer{
     height: 80px;
@@ -209,5 +214,11 @@ footer p{
         height: 600px;
         width: 95%;
         margin-top: 20px;
+    }
+
+    #block-timer{
+        width: 93%;
+        max-width: 99%;
+        padding: 5px;
     }
 }
