@@ -1,40 +1,56 @@
 const imageSlider = document.querySelector("#slider").querySelector("img");
 const flecheGauche = document.querySelector("#flechegauche");
 const flecheDroite = document.querySelector("#flechedroite");
-let imageIndex = 0;
-const images = [
+
+// Objet slider
+const slider = {
+  index: 0,
+  image: [
     "images/slider1.jpg",
     "images/slider2.jpg",
     "images/slider3.jpg",
     "images/slider4.jpg",
     "images/slider5.jpg"
-];
+  ],
 
-flecheGauche.addEventListener("click", precedente);
-flecheDroite.addEventListener("click", suivante);
-
-function suivante() {
-    imageIndex++;
-    if (imageIndex > images.length - 1){
-        imageIndex = 0;
+  suivant: function() {
+    this.index++;
+    if (this.index > this.image.length - 1) {
+      this.index = 0;
     }
-    imageSlider.setAttribute("src", images[imageIndex]);
-}
+    imageSlider.setAttribute("src", this.image[this.index]);
+  },
 
-function precedente() {
-    imageIndex--;
-    if (imageIndex < 0){
-        imageIndex = images.length - 1;
+  precedent: function() {
+    this.index--;
+    if (this.index < 0) {
+      this.index = this.image.length - 1;
     }
-    imageSlider.setAttribute("src", images[imageIndex]);
-}
+    imageSlider.setAttribute("src", this.image[this.index]);
+  },
 
-document.addEventListener("keydown", function(clavier){
-    if(clavier.keyCode === 37){
-        precedente();
+  clavier: function(e) {
+    const code = e.keyCode;
+    switch (code) {
+      case 39:
+        this.suivant();
+        break;
+      case 37:
+        this.precedent();
+        break;
     }
-    else if(clavier.keyCode === 39){
-        suivante();
-    }
-    });
+  }
+};
 
+// listener fleches et clavier
+flecheDroite.addEventListener("click", function() {
+  slider.suivant();
+});
+
+flecheGauche.addEventListener("click", function() {
+  slider.precedent();
+});
+
+document.addEventListener("keydown", function(e) {
+  slider.clavier(e);
+});
