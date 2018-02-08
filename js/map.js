@@ -34,6 +34,7 @@ ajaxGet(
         reservation.style.display = "block";
         reserver.style.display = "block";
         confirmation.style.display = "none";
+        reservation.scrollIntoView();
 
         if (api[i].status === "OPEN") {
           api[i].status = "OUVERTE";
@@ -72,6 +73,7 @@ ajaxGet(
     // --------------- listener button valider ---------------
     buttonConfirm.addEventListener("click", function() {
       sectionTimer.style.display = "block";
+      sectionTimer.scrollIntoView();
     });
 
     // --------------- regroupement des markers ---------------
