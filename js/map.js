@@ -1,6 +1,6 @@
 ajaxGet(
   "https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=00725f1585ae004d2043b59894843d43b6650b8e",
-  function(reponse) {
+  function (reponse) {
     const api = JSON.parse(reponse);
     let markers = [];
     let stationClick;
@@ -25,7 +25,7 @@ ajaxGet(
       });
 
       // --------------- listener sur les markers ---------------
-      google.maps.event.addListener(marker, "click", function() {
+      google.maps.event.addListener(marker, "click", function () {
         stationClick = api[i];
         const reservation = document.querySelector("#reservation");
         const reserver = document.querySelector("#reserver");
@@ -38,7 +38,7 @@ ajaxGet(
 
         if (api[i].status === "OPEN") {
           api[i].status = "OUVERTE";
-        } else if (api[i].status === "CLOSE"){
+        } else if (api[i].status === "CLOSE") {
           api[i].status = "FERMÉE";
         }
 
@@ -53,13 +53,19 @@ ajaxGet(
       markers = markers.concat(marker);
     }
 
+    // --------------- regroupement des markers ---------------
+    const markerCluster = new MarkerClusterer(map, markers, {
+      imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
+    });
+
+    const reservation = document.querySelector("#reservation");
     const infos = document.querySelector("#informations");
     const buttonConfirm = document.querySelector("#valider");
     const sectionTimer = document.querySelector("#timer");
     const buttonReserver = document.querySelector("#button-reservation").querySelector("button");
 
     // --------------- listener button réserver ---------------
-    buttonReserver.addEventListener("click", function() {
+    buttonReserver.addEventListener("click", function () {
       if (stationClick.available_bikes > 0) {
         confirmation.style.display = "block";
         reserver.style.display = "none";
@@ -71,16 +77,39 @@ ajaxGet(
     });
 
     // --------------- listener button valider ---------------
-    buttonConfirm.addEventListener("click", function() {
+    buttonConfirm.addEventListener("click", function () {
       sectionTimer.style.display = "block";
+      reservation.style.display = "none";
       sectionTimer.scrollIntoView();
+      timer();
+      time = 1200;
     });
 
-    // --------------- regroupement des markers ---------------
-    const markerCluster = new MarkerClusterer(map, markers, {
-      imagePath:
-        "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
-    });
+    // --------------- timer ---------------
+    let time = 1200;
+    const textTimer = document.querySelector("#time");
+    function timer() {
+      s = time;
+      m = 0;
+      if (s < 0) {
+        clearTimeout(timer);
+      } else {
+        time--
+        if (s > 59) {
+          m = Math.floor(s / 60);
+          s = s - m * 60;
+        }
+        if (s < 10) {
+          s = "0" + s;
+        }
+        if (m < 10) {
+          m = "0" + m;
+        }
+        textTimer.innerHTML =
+          `Vous avez bien réservé un vélo pour une durée de ${m}:${s}`
+      }
+      setTimeout(timer, 1000);
+    }
   }
 );
 
