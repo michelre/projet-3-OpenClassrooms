@@ -77,43 +77,35 @@ ajaxGet(
     });
 
     // --------------- listener button valider ---------------
+    let intervalID = 0;
+    let time;
+    const textTimer = document.querySelector("#time");
     buttonConfirm.addEventListener("click", function () {
+      clearInterval(intervalID);
       sectionTimer.style.display = "block";
       reservation.style.display = "none";
       sectionTimer.scrollIntoView();
-      timer();
+      const address = stationClick.address; //Il faut créer une copie de l'adresse plutôt que d'utiliser directement l'objet qui lui change à chaque fois que tu cliques sur un nouveau marker
       time = 1200;
-    });
-
-    // --------------- timer ---------------
-    let time = 1200;
-    const textTimer = document.querySelector("#time");
-    function timer() {
-      sessionStorage.setItem("station", stationClick.address);
-      const storage = sessionStorage.getItem("station");
-      s = time;
-      m = 0;
-      if (s < 0) {
-        clearTimeout(timer);
-      } else {
-        time--
-        if (s > 59) {
-          m = Math.floor(s / 60);
-          s = s - m * 60;
-        }
-        if (s < 10) {
-          s = "0" + s;
-        }
-        if (m < 10) {
-          m = "0" + m;
-        }
+      intervalID = setInterval(() => {
+        sessionStorage.setItem("station", address);
+        const storage = sessionStorage.getItem("station");
+        const { minutes, seconds } = getMinutesAndSeconds(time);
         textTimer.innerHTML =
-          `Vous avez bien réservé un vélo ${storage} pour une durée de ${m}:${s}`
-      }
-      setTimeout(timer, 1000);
-    }
+          `Vous avez bien réservé un vélo ${storage} pour une durée de ${minutes}:${seconds}`
+        time = time - 1;
+      }, 1000)
+    });
   }
 );
+
+function getMinutesAndSeconds(time){
+  let minutes = Math.floor(time / 60);
+  let seconds = time - minutes * 60;
+  seconds = (seconds < 10) ? `0${seconds}` : seconds;
+  minutes = (minutes < 10) ? `0${minutes}` : minutes;
+  return { minutes, seconds };
+}
 
 function initMap() {
   map = new google.maps.Map(document.querySelector("#map"), {
