@@ -89,6 +89,8 @@ ajaxGet(
     let time = 1200;
     const textTimer = document.querySelector("#time");
     function timer() {
+      sessionStorage.setItem("station", stationClick.address);
+      const storage = sessionStorage.getItem("station");
       s = time;
       m = 0;
       if (s < 0) {
@@ -106,7 +108,7 @@ ajaxGet(
           m = "0" + m;
         }
         textTimer.innerHTML =
-          `Vous avez bien réservé un vélo pour une durée de ${m}:${s}`
+          `Vous avez bien réservé un vélo ${storage} pour une durée de ${m}:${s}`
       }
       setTimeout(timer, 1000);
     }
